@@ -3,40 +3,50 @@
 
 #include <string>
 #include <vector>
-template <class T>
-  struct dot{
-      T data[2];
-      string name;
+#include <cstring>
+using namespace std;
 
-      dot():name(){
-          memset(data,0,sizeof(data));
-      }
-      dot(const T& x, const T& y, const string& name_=""): name(name_){
-          data[0] = x;
-          data[1] = y;
-      }
-      T& operator[] (int x){
-          return data[x];
-      }
-  };
+struct dot{
+    int data[2];
+    string name;
 
+    dot():name(){
+      memset(data,0,sizeof(data));
+    }
+    dot(const int& x, const int& y, const string& name_=""): name(name_){
+      data[0] = x;
+      data[1] = y;
+    }
+    int& operator[] (int x){
+      return data[x];
+    }
+    int operator[] (int x) const{
+      return data[x];
+    }
+    bool equalpos(const dot& x) const{
+        return data[0]==x[0] && data[1]==x[1];
+    }
+    bool equalfull(const dot& x) const{
+        return equalpos(x) && name==x.name;
+    }
+    bool equalsmart(const dot& x) const{
+        return equalfull(x) || x.name=="" && equalpos(x);
+    }
+};
 
-template <class T>
-    class md_base{
-    public:
-        md_base(){};
-        virtual void insert(const T&) = 0;
-        virtual void delbypos(const T&) = 0;
-        virtual void delbyname(const string&) = 0;
-        virtual vector<T> findbypos(const T&) = 0;
-        virtual vector<T> findbyname(const string&) = 0;
-        virtual vector<T> search(const T&, const double& dist) = 0;
-        virtual ~md_base(){}
-    private:
-        const md_base& operator = (const md_base&){
-        }
-        md_base(const md_base&){
-        }
-    };
+class md_base{
+public:
+    md_base(){};
+    virtual void insert(const dot&) = 0;
+    virtual void delbypos(const dot&) = 0;
+    virtual void delbyname(const string&) = 0;
+    virtual vector<dot> findbypos(const dot&) = 0;
+    virtual vector<dot> findbyname(const string&) = 0;
+    virtual vector<dot> search(const dot&, const double& dist) = 0;
+    virtual ~md_base(){}
+private:
+    const md_base& operator = (const md_base&){}
+    md_base(const md_base&){}
+};
 
 #endif // MD_BASE_H_INCLUDED

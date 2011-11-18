@@ -3,17 +3,25 @@
 
 #include "MD_base.h"
 
-template <class T>
-    class md_naive : public md_base<T>{
-    public:
-        md_naive(){};
-        void insert(const T&){}
-        void delbypos(const T&){}
-        void delbyname(const string&){}
-        vector<T> findbypos(const T&){}
-        vector<T> findbyname(const string&){}
-        vector<T> search(const T&, const double& dist){};
-        virtual ~md_naive(){};
-    };
+#include<map>
+class md_naive : public md_base{
+private:
+    vector<dot> data;
+    multimap<string, dot> namemap;
+public:
+    md_naive(){};
+    void insert(const dot& x){
+        data.push_back(x);
+        namemap.insert( make_pair(x.name,x) );
+    }
+    void delbypos(const dot& x){
+        for(int i = 0; i < data.size(); ++i)
+            if( x.e)
+    }
+    void delbyname(const string&){}
+    vector<dot> findbypos(const dot&){}
+    vector<dot> findbyname(const string&){}
+    vector<dot> search(const dot&, const double& dist){};
+};
 
 #endif // MD_NAIVE_H_INCLUDED
