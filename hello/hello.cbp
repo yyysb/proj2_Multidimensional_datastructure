@@ -19,6 +19,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="hello.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -47,6 +47,9 @@ public:
     virtual vector<dot> findbypos(const dot&) = 0;
     virtual vector<dot> findbyname(const string&) = 0;
     virtual vector<dot> search(const dot&, const double& d) = 0;
+
+    virtual void importdata(const vector<dot>&) = 0;
+    virtual vector<dot> exportdata() = 0;
     virtual ~md_base(){}
 private:
     const md_base& operator = (const md_base&){}

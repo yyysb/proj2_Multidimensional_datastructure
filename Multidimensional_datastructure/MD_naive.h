@@ -41,7 +41,14 @@ public:
             if( dist(x,data[i]) < d+eps )
                 ret.push_back(data[i]);
         return ret;
-    };
+    }
+
+    void importdata(const vector<dot>& indata){
+        data = indata;
+    }
+    vector<dot> exportdata(){
+        return data;
+    }
 };
 
 #endif // MD_NAIVE_H_INCLUDED
