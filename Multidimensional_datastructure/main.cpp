@@ -43,8 +43,13 @@ typedef pair<int,int> ipair;
 #define FOR(i,n) for (int (i) = 0; (i) < (n); ++(i))
 #define REP(i,a,b) for (int (i) = (a); (i) < (b); ++(i))
 
+
+#include "MD_naive.h"
+
+md_naive<dot<int> > p,q,r;
 int main(){
-    cout<<"hehe"<<endl;
-    cout<<"haha"<<endl;
+    freopen(".in","r",stdin);
+    freopen(".out","w",stdout);
+    //p=q;
     return 0;
 }
