@@ -49,6 +49,8 @@ public:
     vector<dot> exportdata(){
         return data;
     }
+	void testupdate(){
+	}
 };
 
 #endif // MD_NAIVE_H_INCLUDED
