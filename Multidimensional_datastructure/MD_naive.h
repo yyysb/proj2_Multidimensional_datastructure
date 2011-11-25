@@ -3,7 +3,6 @@
 
 #include "MD_base.h"
 
-#include<map>
 class md_naive : public md_base{
 private:
     vector<dot> data;
@@ -21,33 +20,29 @@ public:
             if( s == data[i].name )
                 data.erase(data.begin()+i--);
     }
-    vector<dot> findbypos(const dot& x){
-        vector<dot> ret;
+    dot findbypos(const dot& x){
         for(int i = 0; i < data.size(); ++i)
             if( x.equalpos(data[i]) )
-                ret.push_back(data[i]);
-        return ret;
+                return(data[i]);
+        return nulldot;
     }
-    vector<dot> findbyname(const string& s){
-        vector<dot> ret;
+    dot findbyname(const string& s){
         for(int i = 0; i < data.size(); ++i)
             if( s == data[i].name )
-                ret.push_back(data[i]);
-        return ret;
+                return(data[i]);
+        return nulldot;
     }
-    vector<dot> search(const dot& x, const double& d){
-        vector<dot> ret;
+    void search(const dot& x, const double& d,vector<dot>& ret){
         for(int i = 0; i < data.size(); ++i)
             if( dist(x,data[i]) < d+eps )
                 ret.push_back(data[i]);
-        return ret;
     }
 
     void importdata(const vector<dot>& indata){
         data = indata;
     }
-    vector<dot> exportdata(){
-        return data;
+    void exportdata(vector<dot>& ret){
+        ret = data;
     }
 	void testupdate(){
 	}
