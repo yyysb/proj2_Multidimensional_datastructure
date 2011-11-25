@@ -7,11 +7,12 @@
 #include <cmath>
 using namespace std;
 
-const double eps = 1e-8;
-const int oo = 2147483647;
+const double eps = 1e-8;  // epsilon
+const int oo = 2147483647;// infinity
+
 
 struct dot{
-    int data[2];
+    int data[2];  // coordinate
     string name;
 
     dot():name(){
@@ -36,8 +37,28 @@ struct dot{
     bool equalsmart(const dot& x) const{
         return equalfull(x) || (name=="" && equalpos(x));
     }
+    bool operator ==(const dot& x)const{
+        return equalfull(x);
+    }
 };
 const dot nulldot(oo,oo);
+
+/**
+     base class for multidimensional datastructure(md for short)
+
+     !! important
+     lets guarantee that the coordinates of dots in the md are unique, while names may be the same
+        thus findbypos returns the dot as required, or nulldot if not found
+             findbyname uses vector<dot>& ret in parameter to get return(you don't need to clear the ret in your member function),
+             delbyname deletes all dots whose name is the same as given in the parameter
+
+    search(get all dots that are no more than d away from x),
+        like findbyname, uses vector<dot>& in parameter to get return
+
+    importdata and exportdata are used to save/load the data to/from the outside
+
+    in order to forbidden copy the class(they may have pointer member), copy-constructor and = are private.
+**/
 
 class md_base{
 public:
@@ -46,11 +67,12 @@ public:
     virtual void delbypos(const dot&) = 0;
     virtual void delbyname(const string&) = 0;
     virtual dot findbypos(const dot&) = 0;
-    virtual dot findbyname(const string&) = 0;
-    virtual void search(const dot&, const double& d,vector<dot>&) = 0;
+    virtual void findbyname(const string&, vector<dot>&) = 0;
+    virtual void search(const dot& x, const double& d,vector<dot>&) = 0;
 
     virtual void importdata(const vector<dot>&) = 0;
     virtual void exportdata(vector<dot>&) = 0;
+    virtual int size() = 0;
     virtual ~md_base(){}
 private:
     const md_base& operator = (const md_base&){ return *this;}

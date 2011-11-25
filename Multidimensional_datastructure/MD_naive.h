@@ -7,6 +7,7 @@ class md_naive : public md_base{
 private:
     vector<dot> data;
 public:
+    md_naive():data(){}
     void insert(const dot& x){
         data.push_back(x);
     }
@@ -26,11 +27,10 @@ public:
                 return(data[i]);
         return nulldot;
     }
-    dot findbyname(const string& s){
+    void findbyname(const string& s, vector<dot>& ret){
         for(int i = 0; i < data.size(); ++i)
             if( s == data[i].name )
-                return(data[i]);
-        return nulldot;
+                ret.push_back(data[i]);
     }
     void search(const dot& x, const double& d,vector<dot>& ret){
         for(int i = 0; i < data.size(); ++i)
@@ -44,8 +44,13 @@ public:
     void exportdata(vector<dot>& ret){
         ret = data;
     }
-	void testupdate(){
-	}
+    int size(){
+        return data.size();
+    }
+    dot getrand(){
+        if(data.size()==0) return nulldot;
+            else return data[rand()%data.size()];
+    }
 };
 
 #endif // MD_NAIVE_H_INCLUDED
